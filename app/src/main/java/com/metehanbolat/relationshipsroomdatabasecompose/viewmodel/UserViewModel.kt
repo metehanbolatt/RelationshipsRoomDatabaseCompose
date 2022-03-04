@@ -6,14 +6,15 @@ import com.metehanbolat.relationshipsroomdatabasecompose.database.UserDatabase
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.Library
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.User
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserAndLibrary
+import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserAndLibraryOtM
 import com.metehanbolat.relationshipsroomdatabasecompose.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
 
-    private val _readAllData = MutableLiveData<List<UserAndLibrary>>()
-    val readAllData: LiveData<List<UserAndLibrary>> = _readAllData
+    private val _readAllData = MutableLiveData<List<UserAndLibraryOtM>>()
+    val readAllData: LiveData<List<UserAndLibraryOtM>> = _readAllData
 
     private val repository: UserRepository
 
@@ -22,9 +23,18 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         repository = UserRepository(userDao = userDao)
     }
 
-    fun getUser(userId: Int) {
+    /*
+    fun getUserOtO(userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _readAllData.postValue(repository.getUserData(userId = userId))
+        }
+    }
+
+     */
+
+    fun getUser(userId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _readAllData.postValue(repository.getUserDataOtM(userId = userId))
         }
     }
 

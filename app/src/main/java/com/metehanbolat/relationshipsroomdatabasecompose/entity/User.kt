@@ -30,3 +30,13 @@ data class UserAndLibrary(
     )
     val library: Library
 )
+
+/** One to Many Relationship */
+data class UserAndLibraryOtM(
+    @Embedded val user: User,
+    @Relation(
+        parentColumn = "userId",
+        entityColumn = "userOwnerId"
+    )
+    val library: List<Library>
+)

@@ -4,6 +4,7 @@ import androidx.room.*
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.Library
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.User
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserAndLibrary
+import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserAndLibraryOtM
 
 @Dao
 interface UserDao {
@@ -16,5 +17,9 @@ interface UserDao {
 
     @Transaction
     @Query("SELECT * FROM User WHERE userId = :userId")
-    fun getUserAndLibraries(userId: Int): List<UserAndLibrary>
+    fun getUserAndLibrariesOtO(userId: Int): List<UserAndLibrary>
+
+    @Transaction
+    @Query("SELECT * FROM User WHERE userId = :userId")
+    fun getUserAndLibrariesOtM(userId: Int): List<UserAndLibraryOtM>
 }
