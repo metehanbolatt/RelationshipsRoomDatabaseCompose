@@ -67,4 +67,6 @@ dependencies {
 
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
 }
