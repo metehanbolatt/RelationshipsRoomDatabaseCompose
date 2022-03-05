@@ -1,9 +1,6 @@
 package com.metehanbolat.relationshipsroomdatabasecompose.entity
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.*
 
 @Entity
 data class User(
@@ -40,3 +37,32 @@ data class UserAndLibraryOtM(
     )
     val library: List<Library>
 )
+
+@Entity(primaryKeys = ["userId", "id"])
+data class UserLibraryCrossRef(
+    val userId: Int,
+    val id: Int
+)
+
+/** Many to Many Relationship */
+data class UserWithLibrary(
+    @Embedded val user: User,
+    @Relation(
+        parentColumn = "userId",
+        entityColumn = "id",
+        associateBy = Junction(UserLibraryCrossRef::class)
+    )
+    val library: List<Library>
+)
+
+data class LibraryWithUser(
+    @Embedded val library: Library,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "userId",
+        associateBy = Junction(UserLibraryCrossRef::class)
+    )
+    val user: List<User>
+)
+
+

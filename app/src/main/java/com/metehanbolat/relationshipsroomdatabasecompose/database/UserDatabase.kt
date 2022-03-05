@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 import com.metehanbolat.relationshipsroomdatabasecompose.dao.UserDao
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.Library
 import com.metehanbolat.relationshipsroomdatabasecompose.entity.User
+import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserLibraryCrossRef
 
-@Database(entities = [User::class, Library::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Library::class, UserLibraryCrossRef::class], version = 1, exportSchema = false)
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
 

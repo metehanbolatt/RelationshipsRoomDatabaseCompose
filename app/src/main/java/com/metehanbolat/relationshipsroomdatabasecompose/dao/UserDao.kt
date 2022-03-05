@@ -1,10 +1,7 @@
 package com.metehanbolat.relationshipsroomdatabasecompose.dao
 
 import androidx.room.*
-import com.metehanbolat.relationshipsroomdatabasecompose.entity.Library
-import com.metehanbolat.relationshipsroomdatabasecompose.entity.User
-import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserAndLibrary
-import com.metehanbolat.relationshipsroomdatabasecompose.entity.UserAndLibraryOtM
+import com.metehanbolat.relationshipsroomdatabasecompose.entity.*
 
 @Dao
 interface UserDao {
@@ -14,6 +11,17 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLibrary(item: List<Library>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUserLibrary(item: List<UserLibraryCrossRef>)
+
+    @Transaction
+    @Query("SELECT * FROM User WHERE userId = :userId")
+    fun getUserWithLibrary(userId: Int): List<UserWithLibrary>
+
+    @Transaction
+    @Query("SELECT * FROM User WHERE userId = :id")
+    fun getLibraryWithUser(id: Int): List<LibraryWithUser>
 
     @Transaction
     @Query("SELECT * FROM User WHERE userId = :userId")
